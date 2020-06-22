@@ -1,26 +1,71 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Title from './Title';
+import Search from './Search';
+import Filter from './Filter';
+import List from './List';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    searchTerm: "",
+    filter: "partial",
+    type: "all",
+    results:[]
+  }
+
+  updateSearchTerm = (term) => {
+    this.setState({
+      searchTerm: term
+    })
+  }
+
+  updateFilter = (filter) => {
+    this.setState({
+      filter: filter
+    })
+  }
+
+  updateType = (type) => {
+    this.setState({
+      type: type
+    })
+  }
+
+  getBooks = () => {
+    //const key = 'AIzaSyCsbCxl60M3lLdVQrlpl2xmwpX8qmjv0C8'  
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}&printType=${this.state.type}&filter=${this.state.filter}&key=AIzaSyCsbCxl60M3lLdVQrlpl2xmwpX8qmjv0C8`
+    
+
+    fetch(url)
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      this.setState({
+        results: data.items
+      })
+      console.log(data)
+    })
+    .catch(error => {
+      alert("Ops, an error occurred!")
+    })
+  }
+
+  render(){
+    return (
+      <>
+        <Title/>
+        <Search
+
+        />
+        <Filter
+
+        />
+        <List
+    
+        />
+      </>
+    )
+  }
 }
 
 export default App;
