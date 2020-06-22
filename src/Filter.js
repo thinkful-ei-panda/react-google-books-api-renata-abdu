@@ -34,7 +34,7 @@ class Filter extends React.Component {
                 <option value="full">Full</option>
                 <option value="free-ebooks">Free E-Books</option>
                 <option value="paid-ebooks">Paid E-Books</option>
-                <option value="e-books">All E-Books</option>  
+                <option value="ebooks">All E-Books</option>  
                 </select>
             </div>
         )
