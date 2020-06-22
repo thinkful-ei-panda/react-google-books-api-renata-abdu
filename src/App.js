@@ -46,7 +46,7 @@ class App extends React.Component {
       console.log(data)
     })
     .catch(error => {
-      alert("Ops, an error occurred!")
+      alert("Ops! Something went wrong!")
     })
   }
 
@@ -55,13 +55,15 @@ class App extends React.Component {
       <>
         <Title/>
         <Search
-
+        search={this.updateSearchTerm}
+        getBooks={this.getBooks}
         />
         <Filter
-
+        filter={this.updateFilter}
+        type={this.updateType}
         />
         <List
-    
+        books={this.state.results}
         />
       </>
     )
